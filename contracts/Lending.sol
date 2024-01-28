@@ -83,6 +83,9 @@ contract Lending {
     function requestLoan(uint256 _loanId) external {
         require(_loanId < allLoans.length, "Invalid loan ID");
         uint256 _id = allLoanRequests.length;
+        if(creditScore[msg.sender]==0){
+            creditScore[msg.sender] = 600;
+        }
         LoanRequest memory newLoanRequest = LoanRequest({
             id : _id,
             loanId: _loanId,
